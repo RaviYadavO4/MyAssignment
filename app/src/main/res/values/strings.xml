@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Assignment</string>
+    <string name="default_web_client_id">982083158318-jkgtoei4t9e7ap871idogqlmptn8tv09.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+</resources>
