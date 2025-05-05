@@ -25,7 +25,7 @@ class PhoneRepository(
     private val phoneDao: PhoneDao
 ) {
 
-    private val repoCategoriesRateLimit = RateLimiter<String>(30, TimeUnit.SECONDS)
+    private val repoPhonesRateLimit = RateLimiter<String>(30, TimeUnit.SECONDS)
 
     @ExperimentalCoroutinesApi
     fun fetchPhones(): Flow<Resource<List<Phone>>> {
@@ -33,7 +33,7 @@ class PhoneRepository(
             fetchFromLocal = { phoneDao.all() },
             shouldFetchFromRemote = {
                 val isConnected = ConnectionBuddy.getInstance().hasNetworkConnection()
-                val rateLimiter = repoCategoriesRateLimit.shouldFetch(FETCH_KEY_PHONES)
+                val rateLimiter = repoPhonesRateLimit.shouldFetch(FETCH_KEY_PHONES)
 
                 val fetch = isConnected and rateLimiter
 
@@ -49,7 +49,7 @@ class PhoneRepository(
                 }
             },
             onFetchFailed = { errorBody, statusCode ->
-                repoCategoriesRateLimit.reset(FETCH_KEY_PHONES)
+                repoPhonesRateLimit.reset(FETCH_KEY_PHONES)
             }
         ).flowOn(Dispatchers.IO)
     }
